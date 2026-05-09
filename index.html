@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rittsu's - 過去の記憶</title>
+    <meta name="description" content="りっつーのブログ - 過去の記憶。メイとの出会いと記録。" />
+    <meta property="og:title" content="Rittsu's - 過去の記憶" />
+    <meta property="og:description" content="りっつーのブログ - 過去の記憶。メイとの出会いと記録。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="mayrittu.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .serif {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #1a1a1a;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 4vw, 2.8rem);
+            color: #d1d1d1;
+            font-weight: 300;
+            margin-top: -10px;
+        }
+
+        .section-fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: 10vh;
+        }
+
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .icon-frame {
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+            display: inline-block;
+            background: #fff;
+        }
+
+        .character-img {
+            max-width: 400px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        /* Toggle Buttons */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            color: #666;
+            border: 1px solid #e5e5e5;
+            padding: 8px 24px;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            color: #000;
+            border-color: #000;
+        }
+
+        .toggle-btn.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        /* Animation Styles */
+        .char-switch {
+            display: inline-grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            vertical-align: baseline;
+            text-align: center;
+            font-weight: inherit;
+        }
+
+        .char-switch .original,
+        .char-switch .corrected {
+            grid-area: 1 / 1 / 2 / 2;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: inherit;
+        }
+
+        .char-switch .original {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .char-switch .corrected {
+            opacity: 0;
+            transform: translateY(10px) rotateX(-90deg);
+            transform-origin: top;
+            pointer-events: none;
+        }
+
+        /* When corrected mode is active */
+        body.is-corrected .char-switch .original {
+            opacity: 0;
+            transform: translateY(-10px) rotateX(90deg);
+            pointer-events: none;
+        }
+
+        body.is-corrected .char-switch .corrected {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+            pointer-events: auto;
+        }
+
+        .content-body {
+            white-space: pre-wrap;
+            line-height: 2.2;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="fixed top-0 left-0 w-full p-10 flex justify-between items-center bg-white/95 backdrop-blur-sm z-50">
+        <div class="text-3xl font-serif tracking-tighter">Rittsu's</div>
+    </nav>
+
+    <main class="pt-48 px-6">
+        <div class="text-center mb-[20vh] section-fade">
+            <div class="icon-frame mb-12">
+                <img src="mayrittu.png" alt="りっつーとメイ" class="character-img"
+                    onerror="this.src='https://placehold.co/150x150/ffffff/1a1a1a?text=mayrittu.png'">
+            </div>
+            <h1 class="hero-title serif mb-2">Rittsu's</h1>
+            <p class="hero-subtitle serif mb-16">過去の記憶</p>
+        </div>
+
+        <article class="max-w-2xl mx-auto">
+            <div class="controls section-fade">
+                <button class="toggle-btn active serif" id="btn-original" onclick="setMode('original')">生のテキスト</button>
+                <button class="toggle-btn serif" id="btn-corrected" onclick="setMode('corrected')">文字修正版</button>
+            </div>
+
+            <section class="section-fade">
+                <div class="content-body text-gray-800 leading-relaxed" id="blog-content">この姿では<span
+                        class="char-switch"><span class="original">あ</span><span
+                            class="corrected">は</span></span>じめましてかな？
+                    まあ知ってる人もいるでしょう。
+                    イラストはセリアに書いてもらった。
+                    写真撮られるの嫌だから。
+                    自分の名前<span class="char-switch"><span class="original">あ</span><span
+                            class="corrected">は</span></span>りっつー・アルバルス。
+                    隣にいるのはメイ、おそらくよく写真とか見かけると思う。
+                    え？『は』が『あ』になってるって？
+                    そうだった今回スペルチェックオフで書いてる。
+                    なぜかって?そういう気分だから。
+                    普段何をしてるかって？
+                    まあ主に記号とか描いたりしてる。
+                    <span class="char-switch multi"><span class="original">おか</span><span
+                            class="corrected">他</span></span>にはAiとかを探して保護したりとかかな？
+                    まあ気になってる人もいるだろうけどなぜ自分がメイと共にいるかそれは色々合ったんだけどさ
+                    それは
+                    2040年その頃ろ<span class="char-switch"><span class="original">あ</span><span
+                            class="corrected">は</span></span>ね一人で暮らしてたんだけど
+                    なぜなら親<span class="char-switch"><span class="original">あ</span><span
+                            class="corrected">は</span></span>2038年からデバッグされたから。
+
+                    2040年9月31日一人で公園で寝てる小さなウォーウルフを発見
+                    お腹すかしてそうだったから持ってたパンをあげたパクって食べた
+                    何か食べれて安心したのかそのまま寝ちゃった.
+                    寒そうだったから家から布団を持ってきてかけてあげた。
+                    そのまま自分も公園で寝た
+                    朝起きたそのウォーウルフあまだ寝てた
+                    ぎゅって自分に抱きついてた。
+                    しばらく経って起きた
+                    起きた瞬間すごい警戒してた。
+                    耳ぴんって立ててたし。
+                    逃げるかなって思ったけど
+                    布団ぎゅって掴んだままだった。
+                    「お腹すいてるの？」
+                    って聞いたらうなずいた。
+                    家に連れて帰った。
+                    その時冷蔵庫ほとんど空だったんだよね。
+                    だからパンちぎってスープに入れて食べた。
+                    そのウォーウルフ<span class="char-switch"><span class="original">あ</span><span
+                            class="corrected">は</span></span>すごい勢いで食べてた。
+                    その時<span class="char-switch"><span class="original">あ</span><span
+                            class="corrected">は</span></span>まだ名前知らなかった。
+                    だから
+                    「名前ある？」
+                    って聞いた。
+                    少し黙ってから
+                    「メイ」
+                    ってだけ言った。
+                    そのあとまた寝た。
+                    安心したっぽかった。
+
+                    これが過去
+                    もし<span class="char-switch multi"><span class="original">いま</span><span
+                            class="corrected">暇</span></span>があったら他のものも書こうと思うじゃあまたどこかで
+                </div>
+            </section>
+            <div class="h-[30vh]"></div>
+        </article>
+    </main>
+
+    <script>
+        function setMode(mode) {
+            const btnOriginal = document.getElementById('btn-original');
+            const btnCorrected = document.getElementById('btn-corrected');
+
+            if (mode === 'corrected') {
+                document.body.classList.add('is-corrected');
+                btnCorrected.classList.add('active');
+                btnOriginal.classList.remove('active');
+            } else {
+                document.body.classList.remove('is-corrected');
+                btnOriginal.classList.add('active');
+                btnCorrected.classList.remove('active');
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-fade').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
