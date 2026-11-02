@@ -11,7 +11,7 @@
         }
 
         body {
-            font-family: '2045alphabet', 'Noto Sans JP', sans-serif;
+            font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -138,3 +138,4 @@
             line-height: 2.2;
             font-size: 1.05rem;
         }
+
