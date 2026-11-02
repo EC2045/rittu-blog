@@ -139,3 +139,24 @@
             font-size: 1.05rem;
         }
 
+
+/* The language control belongs to the masthead; spelling belongs to the article. */
+.blog-nav { gap: 1rem; padding: 1.5rem 2.5rem; }
+.blog-language { display:flex; align-items:center; gap:.65rem; font: .8rem/1.5 'Noto Sans JP', sans-serif; letter-spacing:.04em; color:#777; }
+.blog-language button { appearance:none; border:0; border-bottom:1px solid transparent; padding:.3rem 0; background:transparent; color:inherit; cursor:pointer; }
+.blog-language button[aria-pressed="true"] { color:#1a1a1a; border-bottom-color:currentColor; }
+.blog-language button:focus-visible { outline:2px solid #555; outline-offset:5px; }
+.blog-language .blog-language-auto { margin-left:.4rem; font-size:.65rem; letter-spacing:.08em; }
+@media(max-width:480px) {
+    .blog-nav { padding:1rem 1.25rem; }
+    .blog-nav > div:first-child { font-size:1.5rem; }
+    .blog-language { gap:.5rem; font-size:.7rem; }
+    .controls { gap:.5rem; }
+    .toggle-btn { padding:.65rem 1rem; letter-spacing:.04em; }
+}
+@media(prefers-reduced-motion:reduce) {
+    .section-fade { opacity:1; transform:none; transition:none; }
+    .char-switch .original,.char-switch .corrected { transition:none; }
+}
+
+@media(prefers-reduced-motion:reduce){.toggle-btn{transition:none}}
